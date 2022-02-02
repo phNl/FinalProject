@@ -1,0 +1,21 @@
+@@include('parts/header.html')
+<div id="artstation-pic"></div>
+<script>
+    fetch('artstation.json')
+        .then(res => res.json())
+        .then(data => {
+            for (let i = 0; i < 3; i++){
+                addImage(data[i].data)
+            }
+        })
+
+    function addImage(data){
+        const pic = document.createElement('img')
+        const pics = document.getElementById('artstation-pic')
+
+        pic.src = data
+        pic.width = 200
+        pics.append(pic)
+    }
+</script>
+@@include('parts/footer.html')

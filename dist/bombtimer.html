@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Final Project</title><link rel="stylesheet" href="index.css"></head><body><div id="hat"><ul id="hat-ul"><li class="hat-li"><button class="hat-button" onclick="window.location.href='index.html'">Home</button></li><li class="hat-li" id="hat-games"><button class="hat-button">Games</button><p class="dropdown-content" id="hat-games-content"><button class="hat-dropdown-content-button" onclick="window.location.href='whackamole.html'">Whack a Mole</button> <button class="hat-dropdown-content-button" onclick="window.location.href='pilots.html'">The pilots brothers</button></p></li><li class="hat-li" id="hat-other"><button class="hat-button">Other</button><p class="dropdown-content" id="hat-other-content"><button class="hat-dropdown-content-button" onclick="window.location.href='artstation.html'">ArtStation</button> <button class="hat-dropdown-content-button" onclick="window.location.href='lodashexample.html'">Lodash Example</button> <button class="hat-dropdown-content-button" onclick="window.location.href='bombtimer.html'">Bomb Timer</button></p></li><li class="hat-li"><button class="hat-button" onclick="window.location.href='about.html'">About</button></li></ul></div><div id="bombtimer-text" style="display: inline-block">00:00</div><button id="bombtimer-start">Старт</button><script>const maxTime = 15
+    let button = document.getElementById("bombtimer-start")
+    let timerText = document.getElementById("bombtimer-text")
+    let time = maxTime
+
+    button.onclick = function() {
+        button.disabled = true
+        let prom = new Promise((resolve, reject) => {
+            let timer = setInterval(() => {
+                time--
+                timerText.innerText = time < 10 ? '00:0' + time : '00:' + time
+
+                if (time === 0) {
+                    time = maxTime
+                    timerText.innerText = '00:' + time
+                    clearInterval(timer)
+                    resolve(true)
+                    button.disabled = false
+                }
+            }, 1000)
+        })
+
+        prom.then((flag) => {
+            console.log("Promise: " + flag)
+        })
+    }</script></body></html>

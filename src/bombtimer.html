@@ -1,0 +1,33 @@
+@@include('parts/header.html')
+<div id="bombtimer-text" style="display: inline-block">00:00</div>
+<button id="bombtimer-start">Старт</button>
+
+<script>
+    const maxTime = 15
+    let button = document.getElementById("bombtimer-start")
+    let timerText = document.getElementById("bombtimer-text")
+    let time = maxTime
+
+    button.onclick = function() {
+        button.disabled = true
+        let prom = new Promise((resolve, reject) => {
+            let timer = setInterval(() => {
+                time--
+                timerText.innerText = time < 10 ? '00:0' + time : '00:' + time
+
+                if (time === 0) {
+                    time = maxTime
+                    timerText.innerText = '00:' + time
+                    clearInterval(timer)
+                    resolve(true)
+                    button.disabled = false
+                }
+            }, 1000)
+        })
+
+        prom.then((flag) => {
+            console.log("Promise: " + flag)
+        })
+    }
+</script>
+@@include('parts/footer.html')

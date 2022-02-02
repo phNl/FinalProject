@@ -1,0 +1,27 @@
+@@include('parts/header.html')
+<h1>
+    На этой странице демонстрируется работа Lodash. <br>
+    Все примеры выведены в консоль.
+</h1>
+<script src="lodash.js"></script>
+<script>
+    console.log(_.VERSION);
+
+    console.log('Заменяем \"Привет\" на \"Пока\":')
+    let str = "Привет, мир!"
+    console.log("Было: ", str)
+    str = _.replace(str, "Привет", "Пока")
+    console.log("Стало: ", str, '\n')
+
+    console.log('Преобразовываем \"Пока, мир!\" из предыдущего примера в \"пока-мир\":')
+    console.log(_.snakeCase(str), '\n')
+
+    console.log('Делаем обычную строку с большой буквы:')
+    console.log('Было: я зАБыл КАк пиСАть с бОЛЬшоЙ бУКВы.')
+    console.log('Стало: ', _.capitalize("я зАБыл КАк пиСАть с бОЛЬшоЙ бУКВы."), '\n')
+
+    console.log('Берём все слова из строки и создаём из них массив:')
+    console.log('Было: здесь много слов, которые можно положить в массив')
+    console.log('Стало: ', _.words("здесь много слов, которые можно положить в массив"))
+</script>
+@@include('parts/footer.html')

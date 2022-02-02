@@ -1,0 +1,61 @@
+$hat_background: #3A506B;
+
+#hat {
+  width: 100%;
+  height: 70px;
+  background: $hat_background;
+}
+
+#hat-ul {
+  list-style: none;
+  display: flex;
+}
+
+.hat-li {
+  margin-top: 10px;
+  margin-left: 5%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #0B132B;
+
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  padding: 10px 0 10px 0;
+  z-index: 1;
+}
+
+#hat-games:hover #hat-games-content {
+  display: block;
+}
+
+#hat-other:hover #hat-other-content {
+  display: block;
+}
+
+@mixin hat_button_mixin {
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  color: white;
+  padding: 5px;
+  background: $hat_background;
+  border: $hat_background dashed;
+  transition: 0.3s;
+  transition-duration: 0.4s;
+}
+
+.hat-button {
+  @include hat_button_mixin();
+}
+
+.hat-dropdown-content-button {
+  @include hat_button_mixin();
+  width: 90%;
+  margin: 5px 5% 5px 5%;
+}
+
+.hat-button:hover, .hat-dropdown-content-button:hover {
+  border: #5BC0BE solid;
+}

@@ -1,0 +1,40 @@
+#about-mainContainer, #about-photoContainer {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#about-photoContainer {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+}
+
+#about-mainContainer {
+  width: 800px;
+  height: 1200px;
+  margin-left: calc(50% - 400px);
+  background-color: white;
+  font-family: arial, x-locale-body, sans-serif;
+  letter-spacing: -.0027777778rem;
+  font-size: 100%;
+  line-height: 1.75;
+}
+
+.about-textBlock {
+  margin-left: 5%;
+}
+
+#about-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#about-dropdown-content {
+  display: none;
+  position: absolute;
+  border: dashed red;
+}
+
+#about-dropdown:hover #about-dropdown-content {
+  display: block;
+}

@@ -1,0 +1,71 @@
+@@include('parts/header.html')
+<div id="field"></div>
+<script>
+    let gameField = []
+    let fieldDiv = document.getElementById("field")
+
+    // Поменять цвет кнопки на противоположный (белый/чёрный)
+    function changeColor(btn) {
+        if (btn.style.backgroundColor === "white")
+            btn.style.backgroundColor = "black"
+        else
+            btn.style.backgroundColor = "white"
+    }
+
+    // Проверка на победу
+    function checkWin() {
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                if (gameField[i][j].style.backgroundColor === "white")
+                    return false
+            }
+        }
+        return true
+    }
+
+    // Очистка поля (перекрашивание клеток в белый)
+    function clearField() {
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                gameField[i][j].style.backgroundColor = "white"
+            }
+        }
+    }
+
+    // Функция, вызывающаяся при нажатии на любую кнопку
+    function onButtonClick() {
+        changeColor(this)
+        // Поменять цвет всем кнопкам по горизонтали и вертикали относительно нажатой
+        for (let k = 0; k < 4; k++) {
+            changeColor(gameField[k][this.j])
+            changeColor(gameField[this.i][k])
+        }
+
+        if (checkWin()) {
+            alert("Победа");
+            clearField();
+        }
+    }
+
+    // Инициализация игрового поля
+    for (let i = 0; i < 4; i++) {
+        let tempArr = []
+        for (let j = 0; j < 4; j++) {
+            let tempButton = document.createElement('button')
+            tempButton.className = "field-cell"
+            tempButton.style.backgroundColor = "white"
+            // Индексы (координаты) кнопки
+            tempButton.i = i
+            tempButton.j = j
+
+            tempButton.onclick = onButtonClick
+
+            fieldDiv.appendChild(tempButton)
+            tempArr.push(fieldDiv.lastChild)
+        }
+
+        gameField.push(tempArr)
+        fieldDiv.appendChild(document.createElement('br'))
+    }
+</script>
+@@include('parts/footer.html')

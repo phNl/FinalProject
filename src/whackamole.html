@@ -1,0 +1,81 @@
+@@include('parts/header.html')
+Для победы требуется 10 очков
+<div id="score">Очков: 0</div>
+<div id="field"></div>
+<button id="play-button">Играть</button>
+Сложность:
+<input id="difficult-range" type="range" min="1" max="3" step="1" value="1">
+
+<script>
+    let gameField = [];
+    let fieldDiv = document.getElementById("field");
+    let score = 0;
+    let flag = false; // Если true, то текущая черная кнопка уже была нажата
+
+    // Инициализация игрового поля
+    for (let i = 0; i < 4; i++) {
+        let tempArr = [];
+        for (let j = 0; j < 4; j++) {
+            let tempButton = document.createElement('button')
+            tempButton.style.backgroundColor = "white"
+            tempButton.className = "field-cell"
+            tempButton.onclick = function () {
+                if (this.style.backgroundColor === "black" && !flag) {
+                    score++
+                    document.getElementById("score").innerHTML = "Очков: " + score
+                    flag = true
+                }
+            }
+
+            fieldDiv.appendChild(tempButton)
+            tempArr.push(fieldDiv.lastChild)
+        }
+
+        gameField.push(tempArr)
+        fieldDiv.appendChild(document.createElement('br'))
+    }
+
+    let intervalID // Таймер
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max)
+    }
+
+    // Очистка поля (перекрашивание кнопок в белый)
+    function clearField() {
+        for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 4; j++) {
+                if (gameField[i][j].style.backgroundColor === 'black') {
+                    gameField[i][j].style.backgroundColor = "white"
+                    return;
+                }
+            }
+        }
+    }
+
+    // Поменять кнопку, на которую нужно нажать
+    function changeActiveButton() {
+        flag = false
+        clearField()
+
+        // Проверка на победу
+        if (score >= 10) {
+            score = 0
+            clearInterval(intervalID)
+            document.getElementById("score").innerHTML = "Очков: 10"
+            alert("Победа")
+            document.getElementById("score").innerHTML = "Очков: 0"
+            return;
+        }
+
+        // Перекрашивание случайной кнопки в чёрный (что делает её активной кнопкой)
+        gameField[getRandomInt(4)][getRandomInt(4)].style.backgroundColor = "black"
+    }
+
+    // Инициализация кнопки старта игры
+    document.getElementById("play-button").onclick = function () {
+        let difLevel = document.getElementById("difficult-range").value
+        intervalID = setInterval(changeActiveButton, 2000 - difLevel*500)
+    }
+</script>
+@@include('parts/footer.html')
